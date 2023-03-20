@@ -34,9 +34,16 @@ router.get("/dogs/:id", async (req, res) => {
 });
 
 router.post("/dogs", async (req, res) => {
-  const { image, name, height, weight, lifeYears } = req.body;
+  const { image, name, height, weight, lifeYears, temperament } = req.body;
   try {
-    const newDog = await postDog(image, name, height, weight, lifeYears);
+    const newDog = await postDog(
+      image,
+      name,
+      height,
+      weight,
+      lifeYears,
+      temperament
+    );
     res.status(200).json(newDog);
   } catch (error) {
     res.status(400).json({ error: error.message });

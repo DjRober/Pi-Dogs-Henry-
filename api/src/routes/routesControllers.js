@@ -63,11 +63,12 @@ const getDogsByName = async (name) => {
 
   if (dogsDatabase.length != 0) dogs = [...dogsDatabase, ...dogs];
 
+  if (!dogs.length) throw Error(`No se ha encontrado la raza de perro ${name}`);
   return dogs;
 };
 
 const getDogById = async (id) => {
-  if (typeof id == "string") {
+  if (id.length > 5) {
     let dogDatabase = await Dog.findByPk(id, {
       include: Temperament,
     });
@@ -83,14 +84,19 @@ const getDogById = async (id) => {
   return dog;
 };
 
-const postDog = async (image, name, height, weight, lifeYears) => {
-  const newDog = await Dog.create({
-    image,
-    name,
-    height,
-    weight,
-    lifeYears,
-  });
+const postDog = async (image, name, height, weight, lifeYears, temperament) => {
+  console.log(temperament);
+  const newDog = await Dog.create(
+    {
+      image,
+      name,
+      height,
+      weight,
+      lifeYears,
+    },
+    { include: Temperament }
+  );
+  newDog.addTemperament(temperament);
   return newDog;
 };
 
@@ -125,7 +131,6 @@ const getTemperaments = async () => {
     results = await Temperament.bulkCreate(results);
 
     console.log("primera iteracion!");
-    console.log(temperamets);
     return results;
   }
 
