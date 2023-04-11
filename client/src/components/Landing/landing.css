@@ -1,4 +1,4 @@
-body {
+.landingContainer {
   background-color: #161a1d;
   width: 100vw;
   height: 100vh;
@@ -22,7 +22,7 @@ body {
   width: 80vw;
   border-radius: 3px;
 }
-h1 {
+.title {
   color: white;
   text-shadow: 2px 2px 20px black;
   font-size: 10vh;
@@ -45,6 +45,6 @@ h1 {
   transform: translateY(-0.25em);
 }
 
-h2 {
+.enter {
   color: white;
 }

@@ -9,16 +9,27 @@ const getDogsByName = async (name) => {
       `https://api.thedogapi.com/v1/breeds?api_key=${APIKEY}`
     );
     let dogs = await api.json();
+    let temperaments = await Temperament.findAll();
 
     dogs = dogs.map((breed) => {
+      let weightArray = breed.weight.imperial.split(" - ");
+      let temperamentArray = breed.temperament
+        ? breed.temperament.split(", ").map((e) => {
+            for (let i = 0; i < temperaments.length; i++) {
+              if (e === temperaments[i].name) {
+                return { id: temperaments[i].id, name: e };
+              }
+            }
+          })
+        : [];
       breed = {
         id: breed.id,
-        image: breed.image,
+        image: breed.image.url,
         name: breed.name,
         height: breed.height,
-        weight: breed.weight,
+        weight: { minWeight: weightArray[0], maxWeight: weightArray[1] },
         lifeSpan: breed.life_span,
-        temperament: breed.temperament,
+        temperament: temperamentArray,
       };
       return breed;
     });
@@ -35,19 +46,35 @@ const getDogsByName = async (name) => {
   name = name.toLowerCase();
 
   const api = await fetch(
-    `https://api.thedogapi.com/v1/breeds/search?q=${name}&api_key=${APIKEY}`
+    `https://api.thedogapi.com/v1/breeds?api_key=${APIKEY}`
   );
   let dogs = await api.json();
 
-  dogs = dogs.map((breed) => {
+  let dogsFiltered = dogs.filter((dog) =>
+    dog.name.toLowerCase().includes(name)
+  );
+
+  let temperaments = await Temperament.findAll();
+
+  dogs = dogsFiltered.map((breed) => {
+    let weightArray = breed.weight.imperial.split(" - ");
+    let temperamentArray = breed.temperament
+      ? breed.temperament.split(", ").map((e) => {
+          for (let i = 0; i < temperaments.length; i++) {
+            if (e === temperaments[i].name) {
+              return { id: temperaments[i].id, name: e };
+            }
+          }
+        })
+      : [];
     breed = {
       id: breed.id,
-      image: breed.image,
+      image: breed.image.url,
       name: breed.name,
       height: breed.height,
-      weight: breed.weight,
+      weight: { minWeight: weightArray[0], maxWeight: weightArray[1] },
       lifeSpan: breed.life_span,
-      temperament: breed.temperament,
+      temperament: temperamentArray,
     };
     return breed;
   });
@@ -84,15 +111,14 @@ const getDogById = async (id) => {
   return dog;
 };
 
-const postDog = async (image, name, height, weight, lifeYears, temperament) => {
-  console.log(temperament);
+const postDog = async (image, name, height, weight, lifeSpan, temperament) => {
   const newDog = await Dog.create(
     {
       image,
       name,
       height,
       weight,
-      lifeYears,
+      lifeSpan,
     },
     { include: Temperament }
   );
@@ -117,13 +143,6 @@ const getTemperaments = async () => {
         temperamentsArray.push({ name: element });
       });
     });
-
-    // let results = temperamentsArray.filter(
-    //   (temperament, i) => temperamentsArray.indexOf(temperament) === i
-    // );
-
-    // const temperamentsFiltered = new Set(temperamentsArray);
-    // var results = [...temperamentsFiltered];
 
     let set = new Set(temperamentsArray.map(JSON.stringify));
     let results = Array.from(set).map(JSON.parse);

@@ -1,0 +1,251 @@
+.homeContainer {
+  height: 100vh;
+  width: 100vw;
+  margin: 0px;
+  overflow: hidden;
+  font-family: "Montserrat", sans-serif;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 7vh;
+  background-color: #6c584c;
+}
+
+.apiDb {
+  position: absolute;
+  left: 35%;
+  color: white;
+}
+
+/* Temperaments filter */
+select {
+  appearance: none;
+  outline: 0;
+  border: 0px;
+  font: inherit;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  overflow: scroll;
+}
+option {
+  color: inherit;
+  background-color: black;
+}
+
+/* Search button */
+.search {
+  position: absolute;
+  left: 1.5%;
+  width: 30%;
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+}
+
+.searchBar {
+  width: 100%;
+  background-color: #6c584c;
+  border: 4px solid #adc178;
+  border-right: none;
+  padding: 5px;
+  height: 20px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #adc178;
+}
+.searchBar:focus {
+  /* color */
+  color: white;
+}
+::placeholder {
+  color: grey;
+}
+.searchButton {
+  width: 40px;
+  height: 38px;
+  border: 4px solid #adc178;
+  background: #6c584c;
+  text-align: center;
+  color: white;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+  transition: 0.35s;
+}
+.searchButton:hover {
+  background: #432818;
+}
+
+/* Filters button*/
+.filters {
+  position: absolute;
+  right: 49%;
+}
+.filtersButton {
+  font-size: 2.5vh;
+  height: 38px;
+  border: 4px solid #adc178;
+  border-radius: 1vh;
+  background: #6c584c;
+  color: white;
+  cursor: pointer;
+  transition: 0.35s;
+}
+.filtersButton:hover {
+  background: #432818;
+}
+
+/* Filters Menu */
+.filtersMenu {
+  display: flex;
+  height: 6vh;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #432818;
+  border-radius: 8px;
+  width: 55vh;
+  position: relative;
+  left: 52%;
+}
+.filterText {
+  color: white;
+  font-size: px;
+  text-decoration: none;
+}
+
+/* Plus button */
+.agregarButton {
+  position: relative;
+  right: 40%;
+}
+
+/* Cards */
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 86vh;
+  background-color: #6c584c;
+}
+
+.card {
+  height: 38vh;
+  width: 21vw;
+  border-radius: 1vmax;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  cursor: pointer;
+  transition: filter 200ms linear, transform 200ms linear;
+}
+a {
+  text-decoration: none;
+}
+.card:hover {
+  transform: scale(1.08);
+}
+.name {
+  font-size: 3vh;
+  position: relative;
+  left: 2%;
+  text-shadow: 2px 2px 5px black;
+  text-decoration: none;
+}
+.temperementsCardContainer {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  font: inherit;
+}
+.temperaments {
+  font-size: 2vh;
+  text-shadow: 2px 2px 6px black;
+}
+.peso {
+  position: relative;
+  left: 10%;
+  text-shadow: 2px 2px 6px black;
+}
+
+/* Footer buttons */
+footer {
+  display: flex;
+  justify-content: space-around;
+  height: 7vh;
+  background-color: #6c584c;
+  align-items: center;
+}
+
+.leftButton {
+  display: flex;
+  position: relative;
+  left: 10%;
+  top: -5%;
+  height: 6vh;
+  width: 15vw;
+  border-radius: 5px;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  background-color: #6a994e;
+  cursor: pointer;
+}
+
+.rightButton {
+  display: flex;
+  position: relative;
+  right: 10%;
+  top: -5%;
+  height: 6vh;
+  width: 15vw;
+  border-radius: 5px;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  background-color: #6a994e;
+  cursor: pointer;
+}
+
+.buttonFont {
+  color: white;
+  font-size: 2.5vh;
+}
+
+.pagination {
+  position: absolute;
+  color: white;
+  text-shadow: 2px 2px 5px black;
+  font-size: 2.5vh;
+  left: 5%;
+}
+
+.temperamentsTags {
+  position: absolute;
+  right: 3%;
+  height: 7vh;
+  bottom: 0.5%;
+  width: 22%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.temperamentWord {
+  margin: 0px;
+  padding: 0px;
+  outline: none;
+  color: white;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.temperamentWord:hover {
+  color: red;
+}
